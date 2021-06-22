@@ -2,13 +2,14 @@
 #define MAINWINDOW_H
 
 
-#include <QGSettings>
-#include <QPainter>
+
 #include "dialog.h"
 #include "thermometer.h"
+
 #include <QRegularExpression>
 #include <QtDBus/QtDBus>
-
+#include <QGSettings>
+#include <QPainter>
 #include <QMainWindow>
 #include <QGlobalStatic>
 

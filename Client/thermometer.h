@@ -17,6 +17,7 @@ public:
 
     void setLabel(QString bugInfo);
     void setProgressBar(double temperature);
+
 private:
     Ui::thermometer *ui;
 };
