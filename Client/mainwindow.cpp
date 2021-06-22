@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QDebug>
 
 class MainWindowPrivate
 {
@@ -36,6 +37,10 @@ MainWindow::MainWindow(QWidget *parent)
     d->id_exp.setPattern("^[1-9]\\d{5}(18|19|([23]\\d))\\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d{3}[0-9Xx]$");
     //tel_exp.setPattern("^1(3[0-9]|5[0-3,5-9]|7[1-3,5-8]|8[0-9])\\d{8}$");
     d->tel_exp.setPattern("^1(3[0-9]|5[0-3,5-9]|7[1-3,5-8]|8[0-9])\\d{8}$");
+
+
+
+    qDebug() << "~~~11";
 }
 
 MainWindow::~MainWindow()
@@ -149,7 +154,7 @@ void MainWindow::on_pushButton_clicked()
             break;
         }
 
-        if (35.0 > ui->lineEdit_temperature->text().toDouble()) {
+        if (35.0 < ui->lineEdit_temperature->text().toDouble()) {
             double temperature = ui->lineEdit_temperature->text().toDouble();
             if (d->m_settings) {
                 d->m_settings->trySet("temperature",temperature);

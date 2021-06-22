@@ -1,5 +1,7 @@
-﻿#include "mainwindow.h"
+#include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "echointerface.h"
+#include <QDebug>
 
 class MainWindowPrivate
 {
@@ -9,7 +11,8 @@ public:
         int count;
         QStandardItemModel *model;
         MainWindow *q_ptr;
-
+        bool LoadPlugin();
+        EchoInterface *echoInterface;
         MainWindowPrivate(MainWindow* parent)
         {
             count = 0;
@@ -73,6 +76,62 @@ void MainWindow::server_get(QString name , int age , QString id , QString tel , 
     }
 
     d->count++;
+
+    if(d->LoadPlugin()){
+        d->echoInterface->echo("Test");
+    }
+
+
 }
 
 
+bool MainWindowPrivate::LoadPlugin()
+{
+
+    bool ret = true;
+        //获取当前应用程序所在路径
+        QDir pluginsDir(qApp->applicationDirPath());
+    #if defined(Q_OS_WIN)
+        if (pluginsDir.dirName().toLower() == "debug" || pluginsDir.dirName().toLower() =="release"){
+            pluginsDir.cdUp();
+            pluginsDir.cdUp();
+        }
+    #elif defined(Q_OS_MAC)
+        if (pluginsDir.dirName() == "MacOS")
+        {
+            pluginsDir.cdUp();
+            pluginsDir.cdUp();
+            pluginsDir.cdUp();
+        }
+    #elif defined(Q_OS_LINUX)
+        pluginsDir.cdUp();
+    #endif
+        //切换到插件目录
+        pluginsDir.cd("plugins");
+        //遍历plugins目录下所有文件
+        foreach (QString fileName, pluginsDir.entryList(QDir::Files))
+        {
+            QPluginLoader pluginLoader(pluginsDir.absoluteFilePath(fileName));
+
+            QObject *plugin = pluginLoader.instance();
+            if (plugin)
+            {
+                //插件名称
+                QString pluginName = plugin->metaObject()->className();
+                //对插件初始化
+                if(pluginName == "EchoPlugin")
+                {
+                    echoInterface = qobject_cast<EchoInterface*>(plugin);
+                    if (echoInterface)
+                        ret =  true;
+                    break;
+                }
+                else
+                {
+                    ret = false;
+                }
+            }
+        }
+        return ret;
+
+}
