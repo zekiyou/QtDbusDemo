@@ -9,20 +9,23 @@ namespace Ui {
 class MainWindow;
 }
 
+class MainWindowPrivate;
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", "com.qdbus.server")
+    Q_DECLARE_PRIVATE(MainWindow)
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
 private:
-    Ui::MainWindow *ui;
-
-    int count=0;
-    QStandardItemModel *model;
+    MainWindowPrivate* d_ptr;
+    Ui::MainWindow *ui;   
+//    int count=0;
+//    QStandardItemModel *model;
 
 public slots:
      //接受Client发送的send_to_server数据已经发送信号

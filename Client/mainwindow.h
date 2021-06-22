@@ -8,6 +8,7 @@
 #include "thermometer.h"
 #include <QRegularExpression>
 #include <QtDBus/QtDBus>
+
 #include <QMainWindow>
 #include <QGlobalStatic>
 
@@ -15,10 +16,12 @@ namespace Ui {
 class MainWindow;
 }
 
+class MainWindowPrivate;
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "com.qdbus.client")
+    Q_DECLARE_PRIVATE(MainWindow)
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
@@ -33,12 +36,17 @@ private slots:
     void client_get_error(void);
 
 private:
+
+    MainWindowPrivate* d_ptr;
     Ui::MainWindow *ui;
+
+    /*
     QGSettings* m_settings;
     Dialog* m_dialog;
     thermometer* m_thermometer;
     QRegExp id_exp;
     QRegExp tel_exp;
+    */
 
 };
 
