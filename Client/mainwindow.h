@@ -5,7 +5,7 @@
 
 #include "dialog.h"
 #include "thermometer.h"
-
+#include "mainwindowinterface.h"
 #include <QRegularExpression>
 #include <QtDBus/QtDBus>
 #include <QGSettings>

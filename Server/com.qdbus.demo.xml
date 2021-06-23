@@ -1,0 +1,17 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node>
+  <interface name="com.qdbus.server">
+    <signal name="send_to_client_ok">
+    </signal>
+    <signal name="send_to_client_error">
+    </signal>
+    <method name="server_get">
+      <arg name="name" type="s" direction="in"/>
+      <arg name="age" type="i" direction="in"/>
+      <arg name="id" type="s" direction="in"/>
+      <arg name="tel" type="s" direction="in"/>
+      <arg name="adress" type="s" direction="in"/>
+      <arg name="temperature" type="d" direction="in"/>
+    </method>
+  </interface>
+</node>

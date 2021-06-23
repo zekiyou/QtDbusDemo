@@ -14,6 +14,7 @@ public:
     QRegExp id_exp;
     QRegExp tel_exp;
     MainWindow* q_ptr;
+    ComQdbusServerInterface *m_demoInter;
 
     MainWindowPrivate(MainWindow* parent)
     {
@@ -37,6 +38,8 @@ MainWindow::MainWindow(QWidget *parent)
     d->id_exp.setPattern("^[1-9]\\d{5}(18|19|([23]\\d))\\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d{3}[0-9Xx]$");
     //tel_exp.setPattern("^1(3[0-9]|5[0-3,5-9]|7[1-3,5-8]|8[0-9])\\d{8}$");
     d->tel_exp.setPattern("^1(3[0-9]|5[0-3,5-9]|7[1-3,5-8]|8[0-9])\\d{8}$");
+
+    d->m_demoInter = new ComQdbusServerInterface("com.qdbus.server","/com/qdbus/server",QDBusConnection::sessionBus(),this);
 
 }
 
@@ -163,19 +166,28 @@ void MainWindow::on_pushButton_clicked()
                 break;
         }
 
-        QDBusMessage message = QDBusMessage::createMethodCall(
-                                                             "com.qdbus.server",
-                                                             "/com/qdbus/server",
-                                                             "com.qdbus.server",
-                                                             "server_get");
-        message << ui->lineEdit_name->text()
-                << ui->lineEdit_age->text().toInt()
-                << ui->lineEdit_id->text()
-                << ui->lineEdit_tel->text()
-                << ui->lineEdit_adress->text()
-                << ui->lineEdit_temperature->text().toDouble();
+//        Message 方式调用接口提供的函数
+//        QDBusMessage message = QDBusMessage::createMethodCall(
+//                                                             "com.qdbus.server",
+//                                                             "/com/qdbus/server",
+//                                                             "com.qdbus.server",
+//                                                             "server_get");
+//        message << ui->lineEdit_name->text()
+//                << ui->lineEdit_age->text().toInt()
+//                << ui->lineEdit_id->text()
+//                << ui->lineEdit_tel->text()
+//                << ui->lineEdit_adress->text()
+//                << ui->lineEdit_temperature->text().toDouble();
 
-        QDBusConnection::sessionBus().call(message);
+//        QDBusConnection::sessionBus().call(message);
+
+//      适配器方式调用接口提供的函数
+        d->m_demoInter->server_get(ui->lineEdit_name->text(),
+                                   ui->lineEdit_age->text().toInt(),
+                                   ui->lineEdit_id->text(),
+                                   ui->lineEdit_tel->text(),
+                                   ui->lineEdit_adress->text(),
+                                   ui->lineEdit_temperature->text().toDouble());
 
     } while(0);
 

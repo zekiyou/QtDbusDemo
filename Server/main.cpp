@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include <QApplication>
+#include "mainwindowadaptor.h"
 
 int main(int argc, char *argv[])
 {
@@ -12,15 +13,15 @@ int main(int argc, char *argv[])
     //注册Dbus服务
     connection.registerService("com.qdbus.server");
     //注册Dbus对象
-    connection.registerObject("/com/qdbus/server", &w, QDBusConnection::ExportAllSlots | QDBusConnection::ExportAllSignals);
 
-    QDBusConnection::sessionBus().connect("com.qdbus.client",
-                                          "/com/qdbus/client",
-                                          "com.qdbus.client",
-                                          "send_to_server",
-                                          &w,
-                                          SLOT(server_get(QString name , int age , QString id , QString tel , QString adress , double temperature))
-                                          );
+
+    //用Object来导出信号和槽函数
+    //connection.registerObject("/com/qdbus/server", &w, QDBusConnection::ExportAllSlots | QDBusConnection::ExportAllSignals);
+
+    //用适配器方式来导出信号和槽函数
+    ServerAdaptor adaptor(&w);
+    connection.registerObject("/com/qdbus/server", &w);
+
 
     return a.exec();
 }
