@@ -78,9 +78,8 @@ void MainWindow::server_get(QString name , int age , QString id , QString tel , 
     d->count++;
 
     if(d->LoadPlugin()){
-        d->echoInterface->echo("Test");
+        d->echoInterface->echo(QString::number(temperature));
     }
-
 
 }
 

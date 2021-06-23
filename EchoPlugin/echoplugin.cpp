@@ -8,6 +8,6 @@ EchoPlugin::EchoPlugin(QObject *parent) :
 
 QString EchoPlugin::echo(const QString &message)
 {
-    qDebug()<<message;
+    qDebug() << message;
     return message;
 }

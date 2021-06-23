@@ -20,12 +20,5 @@ void thermometer::setLabel(QString bugInfo)
 
 void thermometer::setProgressBar(double temperature)
 {
-
-    ui->progressBar->setValue(temperature);
-
-    if (37.2 <= temperature)
-        ui->progressBar->setStyleSheet("QProgressBar::chunk { background-color: red }");
-    if (37.2 < temperature)
-        ui->progressBar->setStyleSheet("QProgressBar::chunk { background-color: green }");
-
+    ui->myThermometer->setTemperature(temperature);
 }

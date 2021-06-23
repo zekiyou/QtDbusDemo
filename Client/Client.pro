@@ -52,3 +52,8 @@ else:unix: LIBS += -L$$PWD/../../../../../../usr/lib/x86_64-linux-gnu/ -lgsettin
 
 INCLUDEPATH += $$PWD/../../../../../../usr/lib/x86_64-linux-gnu
 DEPENDPATH += $$PWD/../../../../../../usr/lib/x86_64-linux-gnu
+
+
+HEADERS += mythermometer.h
+SOURCES += mythermometer.cpp
+

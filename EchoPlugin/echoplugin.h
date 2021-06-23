@@ -1,7 +1,7 @@
 #ifndef ECHOPLUGIN_H
 #define ECHOPLUGIN_H
 
-#include "../QtDbusDemo/Server/echointerface.h"
+#include "../Server/echointerface.h"
 
 class EchoPlugin : public QObject, public EchoInterface
 {

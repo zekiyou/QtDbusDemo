@@ -7,7 +7,6 @@ DESTDIR         = ../plugins
 
 HEADERS += \
     echoplugin.h \
-    ../QtDbusDemo/Server/echointerface.h
 
 SOURCES += \
     echoplugin.cpp

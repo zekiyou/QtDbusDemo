@@ -38,9 +38,6 @@ MainWindow::MainWindow(QWidget *parent)
     //tel_exp.setPattern("^1(3[0-9]|5[0-3,5-9]|7[1-3,5-8]|8[0-9])\\d{8}$");
     d->tel_exp.setPattern("^1(3[0-9]|5[0-3,5-9]|7[1-3,5-8]|8[0-9])\\d{8}$");
 
-
-
-    qDebug() << "~~~11";
 }
 
 MainWindow::~MainWindow()
