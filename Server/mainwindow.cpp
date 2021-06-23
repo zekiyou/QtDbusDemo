@@ -88,8 +88,8 @@ bool MainWindowPrivate::LoadPlugin()
 {
 
     bool ret = true;
-        //获取当前应用程序所在路径
-        QDir pluginsDir(qApp->applicationDirPath());
+    //获取当前应用程序所在路径
+    QDir pluginsDir(qApp->applicationDirPath());
     #if defined(Q_OS_WIN)
         if (pluginsDir.dirName().toLower() == "debug" || pluginsDir.dirName().toLower() =="release"){
             pluginsDir.cdUp();
@@ -108,29 +108,23 @@ bool MainWindowPrivate::LoadPlugin()
         //切换到插件目录
         pluginsDir.cd("plugins");
         //遍历plugins目录下所有文件
-        foreach (QString fileName, pluginsDir.entryList(QDir::Files))
-        {
+        foreach (QString fileName, pluginsDir.entryList(QDir::Files)) {
             QPluginLoader pluginLoader(pluginsDir.absoluteFilePath(fileName));
-
             QObject *plugin = pluginLoader.instance();
-            if (plugin)
-            {
+            if (plugin) {
                 //插件名称
                 QString pluginName = plugin->metaObject()->className();
                 //对插件初始化
-                if(pluginName == "EchoPlugin")
-                {
+                if (pluginName == "EchoPlugin") {
                     echoInterface = qobject_cast<EchoInterface*>(plugin);
                     if (echoInterface)
                         ret =  true;
                     break;
                 }
-                else
-                {
+                else {
                     ret = false;
                 }
             }
         }
         return ret;
-
 }
