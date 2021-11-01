@@ -56,5 +56,6 @@ DEPENDPATH += $$PWD/../../../../../../usr/lib/x86_64-linux-gnu
 
 HEADERS += mythermometer.h
 SOURCES += mythermometer.cpp
+
 HEADERS += mainwindowinterface.h
 SOURCES += mainwindowinterface.cpp

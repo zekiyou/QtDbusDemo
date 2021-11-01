@@ -12,7 +12,7 @@ void MyThermometer::paintEvent(QPaintEvent *)
 {
         QPainter painter(this);             // 创建QPainter一个对象
         QPen pen;
-        QBrush brush;   //画刷。填充几何图形的调色板，由颜色和填充风格组成
+        QBrush brush;   //画刷 填充几何图形的调色板，由颜色和填充风格组成
 
         brush.setStyle(Qt::SolidPattern);
 

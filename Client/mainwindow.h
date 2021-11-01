@@ -1,8 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-
-
 #include "dialog.h"
 #include "thermometer.h"
 #include "mainwindowinterface.h"

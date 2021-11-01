@@ -1,0 +1,2 @@
+Qt疫情软件分成Server和Client通过dbus数据总线通信
+该Demo用以熟悉Qt插件机制，dbus和gsetting
